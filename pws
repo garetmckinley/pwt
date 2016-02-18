@@ -1,0 +1,45 @@
+#!/bin/bash
+# pws is a tool for managing the encrypted pw storage
+# usage: pws [-e(encrypt)|-d(decryopt)]
+
+PWFEPATH=~/.epws
+PWFPATH=~/.pws
+
+
+if [[ $# -eq 0 ]]; then
+  if [[ -f $PWFPATH/.pwt ]]; then
+    echo "$PWFPATH is decrypted."
+    echo "use: 'pws -e' to encrypt"
+  else
+    echo "$PWFPATH is encrypted."
+    echo "use: 'pws -d' to decrypt"
+  fi
+  exit 1;
+fi
+
+while getopts ":ed" opt; do
+  case $opt in
+    e)
+      if [[ -f $PWFPATH/.pwt ]]; then
+        fusermount -u $PWFPATH
+      else
+        echo "$PWFPATH is already encrypted"
+      fi
+      exit 0;
+      ;;
+    d)
+      if [[ -f $PWFPATH/.pwt ]]; then
+        echo "$PWFPATH is already decrypted"
+      else
+        encfs $PWFEPATH $PWFPATH
+        touch $PWFPATH/.pwt
+      fi
+      exit 0;
+      ;;
+    \?)
+      echo "Invalid option: -$OPTARG" >&2
+      exit 1
+      ;;
+  esac
+done
+shift $((OPTIND-1))
