@@ -1,0 +1,11 @@
+#!/bin/bash
+# pwg is a tool for generating a random password
+# usage: pwg <length|default:16>
+
+if [[ -z $1 ]]; then
+  PWFGENLENGTH=16
+else
+  PWFGENLENGTH=$1
+fi
+
+< /dev/urandom tr -dc _$%*\&A-Z-a-z-0-9 | head -c${1:-$PWFGENLENGTH};echo;
