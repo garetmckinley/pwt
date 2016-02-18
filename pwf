@@ -1,0 +1,26 @@
+#!/bin/bash
+# pwf is a tool for finding a saved password
+# usage: pwf <library> <keyword>
+
+
+PWFEPATH=~/.epws
+PWFPATH=~/.pws
+
+if [[ -d $PWFPATH ]]; then
+  if [[ -z $1 ]]; then
+    echo "You must specify a pw library to search"
+    echo "e.g. pwf <mylib> <keyword>"
+  else
+    PWFLIBRARY=$PWFPATH/pw.$1.csv
+    if [[ -f $PWFLIBRARY ]]; then
+      if [[ -z $2 ]]; then
+        echo "You must specify a keyword to search"
+        echo "e.g. pwf <mylib> <keyword>"
+      else
+        grep $2 $PWFLIBRARY
+      fi
+    else
+      echo "Library $1 does not exist"
+    fi
+  fi
+fi
