@@ -3,8 +3,8 @@
 # usage: pwf [-e(auto encrypt)] <library> <keyword>
 
 
-PWFEPATH=~/.epws
-PWFPATH=~/.pws
+PWFEPATH=~/.nepws
+PWFPATH=~/.npws
 
 AUTOENCRYPT=false
 
@@ -26,9 +26,9 @@ done
 
 if [[ ! -f $PWFPATH/.pwt ]]; then
   if [[ -d $PWFEPATH ]]; then
-    ./pws -d
+    ./pws -d $PWFEPATH $PWFPATH
   else
-    ./pws init $PWFEPATH $PWFPATH
+    ./pws -i $PWFEPATH $PWFPATH
   fi
 fi
 

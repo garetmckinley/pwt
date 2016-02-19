@@ -2,32 +2,42 @@
 # pws is a tool for managing the encrypted pw storage
 # usage: pws [-e(encrypt)|-d(decryopt)]
 
-PWFEPATH=~/.epws
-PWFPATH=~/.pws
 
-
-if [[ $# -eq 0 ]]; then
-  if [[ -f $PWFPATH/.pwt ]]; then
-    echo "$PWFPATH is decrypted."
-    echo "use: 'pws -e' to encrypt"
-  else
-    echo "$PWFPATH is encrypted."
-    echo "use: 'pws -d' to decrypt"
-  fi
-  exit 1;
-fi
-
-while getopts ":ed" opt; do
+while getopts ":edi" opt; do
   case $opt in
     e)
+      shift
+      if [[ -z $1 ]]; then
+        echo "You must specify an encrypted folder"
+      else
+        PWFEPATH=$1
+        shift
+      fi
+      if [[ -z $1 ]]; then
+        echo "You must specify an encrypted folder"
+      else
+        PWFPATH=$1
+      fi
       if [[ -f $PWFPATH/.pwt ]]; then
         fusermount -u $PWFPATH
       else
         echo "$PWFPATH is already encrypted"
       fi
       exit 0;
-      ;;
+    ;;
     d)
+      shift
+      if [[ -z $1 ]]; then
+        echo "You must specify an encrypted folder"
+      else
+        PWFEPATH=$1
+        shift
+      fi
+      if [[ -z $1 ]]; then
+        echo "You must specify an encrypted folder"
+      else
+        PWFPATH=$1
+      fi
       if [[ -f $PWFPATH/.pwt ]]; then
         echo "$PWFPATH is already decrypted"
       else
@@ -35,11 +45,42 @@ while getopts ":ed" opt; do
         touch $PWFPATH/.pwt
       fi
       exit 0;
-      ;;
+    ;;
+    i)
+    if [[ -z $2 ]]; then
+      echo "You must specify a destination for the encrypted volume"
+    else
+      if [[ -z $3 ]]; then
+        echo "You must specify a destination for the decrypted volume"
+      else
+        encfs $2 $3
+      fi
+    fi
+    exit 0;;
     \?)
       echo "Invalid option: -$OPTARG" >&2
       exit 1
-      ;;
+    ;;
   esac
 done
 shift $((OPTIND-1))
+
+
+#  This Code is from the former version which had
+#  a set directory declared for the encrypted and decrypted
+# folders. This has since been changed, but it's not forgotten.
+# this functionality will likely be restored in a more
+# practical and intuitive manner. Maybe having a dedicated
+# file that declares the path variables? Perhaps it'll look
+# for a local ~/.pwt file that has a few path variables in it.
+
+# if [[ $# -eq 0 ]]; then
+#   if [[ -f $PWFPATH/.pwt ]]; then
+#     echo "$PWFPATH is decrypted."
+#     echo "use: 'pws -e' to encrypt"
+#   else
+#     echo "$PWFPATH is encrypted."
+#     echo "use: 'pws -d' to decrypt"
+#   fi
+#   exit 1;
+# fi
