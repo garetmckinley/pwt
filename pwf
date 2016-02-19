@@ -1,10 +1,28 @@
 #!/bin/bash
 # pwf is a tool for finding a saved password
-# usage: pwf <library> <keyword>
+# usage: pwf [-e(auto encrypt)] <library> <keyword>
 
 
 PWFEPATH=~/.epws
 PWFPATH=~/.pws
+
+AUTOENCRYPT=false
+
+usage()
+{
+  echo "usage: pwf [-e(auto encrypt)] <library> <keyword>"
+}
+while getopts e: option
+do
+  case $option in
+    (e)
+    AUTOENCRYPT=true;;
+    (*)
+    usage
+    exit;;
+  esac
+  shift
+done
 
 if [[ ! -f $PWFPATH/.pwt ]]; then
   if [[ -d $PWFEPATH ]]; then
@@ -29,4 +47,8 @@ else
   else
     echo "Library $1 does not exist"
   fi
+fi
+
+if $AUTOENCRYPT == true; then
+  ./pws -e
 fi
