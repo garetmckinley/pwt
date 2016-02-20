@@ -6,11 +6,11 @@ Included in pwt is a set of 3 tools: pws, pwf, and pwg. pws is for managing the 
 # Who is pwt for?
 pwt is for anybody who wants a password manager like 1Password or LastPass from the command line. It's also for anybody who's overly paranoid about using any type of closed source password storage solution. pwt is open source and very transparent. Nothing ever leaves your computer. Better yet, you can pass an option to pwf to automatically re-encrypt the password storage folder once you receive your login.
 
-Since pwt is so minimal, it's provides a solid foundation for anybody wanting to create a password storage application. While an official gui is planned, I'd love to see what the community is capable of creating as well.
+Since pwt is so minimal, it provides a solid foundation for anybody wanting to create a password storage application. While an official gui is planned, I'd love to see what the community is capable of creating as well.
 
 
 # Who can install pwt?
-Currently pwt is only a one man show and developed/tested on Ubuntu 14.04 and OS X 10.11. However, it should run inside any UNIX based terminal emulator that has supports encfs.
+Currently pwt is only a one man show and it's being developed/tested on Ubuntu 14.04 and OS X 10.11. However, it should run inside any *NIX based terminal emulator that has support for encfs.
 
 
 # System Requirements
