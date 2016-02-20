@@ -15,7 +15,7 @@ Currently pwt is only a one man show and it's being developed/tested on Ubuntu 1
 
 # System Requirements
 - A *NIX based operating system
-- EncFS
+- EncFS [(click here for installation tutorial)](https://github.com/mediachicken/pwt/wiki/Installing-EncFS)
 - wget or curl
 
 
