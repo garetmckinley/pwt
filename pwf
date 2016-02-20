@@ -27,29 +27,31 @@ do
   shift
 done
 
-if [[ ! -f $PWFPATH/.pwt ]]; then
-  if [[ -d $PWFEPATH ]]; then
+if ! fexists $PWFPATH/.pwt; then
+  if dexists $PWFEPATH; then
     ./pws -d $PWFEPATH $PWFPATH
   else
     ./pws -i $PWFEPATH $PWFPATH
   fi
 fi
 
-if [[ -z $1 ]]; then
-  echo "You must specify a pw library to search"
-  echo "e.g. pwf <mylib> <keyword>"
-else
+if isset $1; then
+  library_name=$1
   PWFLIBRARY=$PWFPATH/pw.$1.csv
+  shift
   if [[ -f $PWFLIBRARY ]]; then
-    if [[ -z $2 ]]; then
+    if isset $1; then
+      grep $1 $PWFLIBRARY
+    else
       echo "You must specify a keyword to search"
       echo "e.g. pwf <mylib> <keyword>"
-    else
-      grep $2 $PWFLIBRARY
     fi
   else
-    echo "Library $1 does not exist"
+    echo "Library $library_name does not exist"
   fi
+else
+  echo "You must specify a pw library to search"
+  echo "e.g. pwf <mylib> <keyword>"
 fi
 
 if $AUTOENCRYPT == true; then
