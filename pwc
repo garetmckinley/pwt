@@ -27,10 +27,10 @@ do
 done
 
 
-if [[ ! -z $1 ]]; then
+if isset $1; then
   input_string=$1
   shift
-  if [[ ! -z $1 ]]; then
+  if isset $1; then
     path_to_private_key=$1/.pk
     shift
   else
