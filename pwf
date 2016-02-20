@@ -39,7 +39,7 @@ if isset $1; then
   library_name=$1
   PWFLIBRARY=$PWFPATH/pw.$1.csv
   shift
-  if [[ -f $PWFLIBRARY ]]; then
+  if fexists $PWFLIBRARY; then
     if isset $1; then
       grep $1 $PWFLIBRARY
     else
