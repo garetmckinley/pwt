@@ -2,9 +2,12 @@
 # pwf is a tool for finding a saved password
 # usage: pwf [-e(auto encrypt)] <library> <keyword>
 
+# Load Defaults one-liner
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )" ; . $DIR/defaults
+#########################
 
-PWFEPATH=~/.nepws
-PWFPATH=~/.npws
+PWFEPATH=$DEFAULT_EPWSPATH
+PWFPATH=$DEFAULT_PWSPATH
 
 AUTOENCRYPT=false
 
