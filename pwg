@@ -8,4 +8,4 @@ else
   PWFGENLENGTH=$1
 fi
 
-< /dev/urandom tr -dc _$%*\&A-Z-a-z-0-9 | head -c${1:-$PWFGENLENGTH};echo;
+< /dev/urandom LC_CTYPE=C tr -dc _$%*\&A-Z-a-z-0-9 | head -c${1:-$PWFGENLENGTH};echo;
