@@ -4,3 +4,28 @@
 DEFAULT_PWTPATH=~/.pwt
 DEFAULT_EPWSPATH=~/.epws
 DEFAULT_PWSPATH=~/.pws
+
+
+function isset {
+  if [[ -z $1 ]]; then
+    return 1
+  else
+    return 0
+  fi
+}
+
+function fexists {
+  if [[ -f $1 ]]; then
+    return 0
+  else
+    return 1
+  fi
+}
+
+function dexists {
+  if [[ -d $1 ]]; then
+    return 0
+  else
+    return 1
+  fi
+}
