@@ -35,22 +35,22 @@ if isset $1; then
       while true; do
         printf "Enter the password: "
         read -r -s password
-        printf "Verify the password"
+        printf "Verify the password: "
         read -r -s password_verify
         echo
         if [[ "$password" -eq "$password_verify" ]]; then
           break
         fi
       done
-      echo "################ Password Preview ###############"
-      pw_entry="$description, $address, $username, $password"
+      echo "################ Password Preview ################"
+      pw_entry="$description,$address,$username,$password"
       echo $pw_entry
       echo ""
       printf "Does this look correct (Y/n)? "
       read confirm_new_password
       if confirmed $confirm_new_password; then
         password=$(pwc -e "$password")
-        pw_entry="$description, $address, $username, $password"
+        pw_entry="$description,$address,$username,$password"
         echo $pw_entry >> $PWLIBRARY
         break
       fi
