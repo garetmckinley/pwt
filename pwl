@@ -1,0 +1,59 @@
+#!/bin/bash
+# pwl is a tool for managing encrypted password csv libraries
+# usage: pwl <library> <new|edit>
+
+# Load Defaults one-liner
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )" ; . $DIR/defaults
+#########################
+
+PWFEPATH=$DEFAULT_EPWSPATH
+PWFPATH=$DEFAULT_PWSPATH
+
+
+if isset $1; then
+  PWLIBRARY=$PWFPATH/pw.$1.csv
+  if ! fexists $PWLIBRARY; then
+    printf "$PWLIBRARY does not exist... create it (Y/n)? "
+    read create_library
+    if confirmed $create_library; then
+      touch $PWLIBRARY
+    else
+      echo "$PWLIBRARY doesn't exist"
+      exit 0
+    fi
+  fi
+  shift
+
+  if [[ $1 == "new" ]]; then
+    while true; do
+      printf "Enter a description for the new password: "
+      read -r description
+      printf "What's the hostname/address for this login? "
+      read -r address
+      printf "Enter the username associated with this password: "
+      read -r username
+      while true; do
+        printf "Enter the password: "
+        read -r -s password
+        printf "Verify the password"
+        read -r -s password_verify
+        echo
+        if [[ "$password" -eq "$password_verify" ]]; then
+          break
+        fi
+      done
+      echo "################ Password Preview ###############"
+      pw_entry="$description, $address, $username, $password"
+      echo $pw_entry
+      echo ""
+      printf "Does this look correct (Y/n)? "
+      read confirm_new_password
+      if confirmed $confirm_new_password; then
+        password=$(pwc -e "$password")
+        pw_entry="$description, $address, $username, $password"
+        echo $pw_entry >> $PWLIBRARY
+        break
+      fi
+    done
+  fi
+fi
