@@ -1,0 +1,6 @@
+#!/bin/bash
+# these are the common settings shared by pwt programs.
+
+DEFAULT_PWTPATH=~/.pwt
+DEFAULT_EPWSPATH=~/.epws
+DEFAULT_PWSPATH=~/.pws
