@@ -9,41 +9,14 @@ pwt is for anybody who wants a password manager like 1Password or LastPass from 
 Since pwt is so minimal, it provides a solid foundation for anybody wanting to create a password storage application. While an official gui is planned, I'd love to see what the community is capable of creating as well.
 
 
-# Who can install pwt?
-Currently pwt is only a one man show and it's being developed/tested on Ubuntu 14.04 and OS X 10.11. However, it should run inside any *NIX based terminal emulator that has support for encfs.
-
-
 # System Requirements
 - A *NIX based operating system
-- EncFS [(click here for installation tutorial)](https://github.com/mediachicken/pwt/wiki/Installing-EncFS)
+- EncFS [(Installing EncFS)](https://github.com/mediachicken/pwt/wiki/Installing-EncFS)
 - wget or curl
 
 
-# Install...
-### From Automated Install (Recommended)
-The recommended way to install pwt is from the install.sh file. You can do do this by running the following command into your favorite terminal
-
-    bash <(curl -s https://raw.githubusercontent.com/mediachicken/pwt/master/install.sh)
-
-At the end of the install it will print out instructions on what to add to your ~/.bashrc file to finish the install.
-
-### From Source Code
-If you'd rather install from the source code to customize your install,
-
-1. Clone the repository:
-
-
-        $ git clone https://github.com/mediachicken/pwt pwt
-        $ cd pwt
-    
-2. If you wish to make any changes to the install location, edit the install.sh and change the `$PREFIXPATH` variable.
-3. Run the install script
-
-
-        $ ./install.sh
-        
-At the end of the install it will print out instructions on what to add to your ~/.bashrc file to finish the install.
-
+# Installation
+### [View Installation Instruction →](https://github.com/mediachicken/pwt/wiki/Installing-pwt)
 
 # License
 pwt is under the [MIT](https://raw.githubusercontent.com/mediachicken/pwt/master/LICENSE) license.
