@@ -29,3 +29,11 @@ function dexists {
     return 1
   fi
 }
+
+function confirmed {
+  if [[ $1 == "Y" || $1 == "y" ]]; then
+    return 0
+  else
+    return 1
+  fi
+}
