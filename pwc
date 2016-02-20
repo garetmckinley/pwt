@@ -1,0 +1,44 @@
+#!/bin/bash
+# pwc (passwowrd crypto) is a tool for encrypting/decrypting strings
+# usage: pwc <-e|encrypt || -d|decrypt> <input_string> <path_to_private_key[default=~/.pwt]>
+
+# Load Defaults one-liner
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )" ; . $DIR/defaults
+#########################
+
+DIRECTION=0
+
+usage()
+{
+  echo "usage: pwc <-e|encrypt || -d|decrypt> <input_string> <path_to_private_key[default=~/.pwt]>"
+}
+while getopts ed: option
+do
+  case $option in
+    (e)
+    DIRECTION=0;;
+    (d)
+    DIRECTION=1;;
+    (*)
+    usage
+    exit;;
+  esac
+  shift
+done
+
+
+if [[ ! -z $1 ]]; then
+  input_string=$1
+  shift
+  if [[ ! -z $1 ]]; then
+    path_to_private_key=$1/.pk
+    shift
+  else
+    path_to_private_key=$DEFAULT_PWTPATH/.pk
+  fi
+  if [[ $DIRECTION == 0 ]]; then
+    echo "$input_string" | openssl enc -aes-256-cbc -a -salt -pass pass:"$(cat $path_to_private_key)"
+  else
+    echo "$input_string"= | openssl enc -aes-256-cbc -a -d -salt -pass pass:"$(cat ~/.pwt/.pk)"
+  fi
+fi
