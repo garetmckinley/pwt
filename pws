@@ -2,6 +2,9 @@
 # pws is a tool for managing the encrypted pw storage
 # usage: pws [-e(encrypt)|-d(decryopt)]
 
+# Load Defaults one-liner
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )" ; . $DIR/defaults
+#########################
 
 while getopts ":edi" opt; do
   case $opt in
@@ -19,7 +22,11 @@ while getopts ":edi" opt; do
         PWFPATH=$1
       fi
       if [[ -f $PWFPATH/.pwt ]]; then
-        fusermount -u $PWFPATH
+        if hash fusermount 2>/dev/null; then
+          fusermount -u $PWFPATH
+        elif hash umount 2>/dev/null; then
+          umount $PWFPATH
+        fi
       else
         echo "$PWFPATH is already encrypted"
       fi
