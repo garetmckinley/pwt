@@ -1,0 +1,36 @@
+#!/bin/bash
+# pwk is a tool for managing your private password key
+# usage: pwk <gen|view|del>
+
+# Load Defaults one-liner
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )" ; . $DIR/defaults
+#########################
+
+if [[ ! -z $1 ]]; then
+  opt=$1
+  shift
+  case $opt in
+    gen)
+      PWTPATH=$(isset $1 && echo "$1" || echo "$DEFAULT_PWTPATH")
+      if fexists $PWTPATH/.pk; then
+        echo "There is already a private key at $PWTPATH/.pk"
+        printf "Would you like to replace it (Y/n)? "
+        read replace_file
+        if confirmed $replace_file; then
+          rm $PWTPATH/.pk
+        else
+          echo "User cancelled."
+          exit 0
+        fi
+      fi
+      for run in {1..16}
+      do
+        pwg 64 >> $PWTPATH/.pk
+      done
+    ;;
+    view)
+    ;;
+    del)
+    ;;
+  esac
+fi
