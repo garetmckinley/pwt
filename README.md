@@ -1,5 +1,5 @@
 # pwt
-pwt is a set of leightweight shell scripts that are useful for managing a library of encrypted passwords. pwt allows you to store your passwords in "libraries" (csv files) that sit in an encrypted folder.
+pwt is a set of lightweight shell scripts that are useful for managing a library of encrypted passwords. pwt allows you to store your passwords in "libraries" (csv files) that sit in an encrypted folder.
 
 Included in pwt is a set of 3 tools: pws, pwf, and pwg. pws is for managing the password storage. You can create a new encrypted storage folder or decrypt/encrypt an existing storage folder. pwf is for querying for the password storage and receiving logins. pwg is a quick password generation tool that can generate an extremely complex password of any length.
 
