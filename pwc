@@ -39,6 +39,6 @@ if isset $1; then
   if [[ $DIRECTION == 0 ]]; then
     echo "$input_string" | openssl enc -aes-256-cbc -a -salt -pass pass:"$(cat $path_to_private_key)"
   else
-    echo "$input_string"= | openssl enc -aes-256-cbc -a -d -salt -pass pass:"$(cat ~/.pwt/.pk)"
+    echo "$input_string" | openssl enc -aes-256-cbc -a -d -salt -pass pass:"$(cat $path_to_private_key)"
   fi
 fi
