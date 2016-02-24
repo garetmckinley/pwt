@@ -1,6 +1,6 @@
 #!/bin/bash
 
-PWTSUITE=( pws pwf pwg )
+PWTSUITE=( pws pwf pwg pwk pwl pwc )
 INSTALLPREFIX=~/.pwt
 URLPREFIX="https://raw.githubusercontent.com/mediachicken/pwt/master"
 
